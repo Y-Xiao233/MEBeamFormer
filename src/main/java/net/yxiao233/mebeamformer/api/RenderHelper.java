@@ -36,7 +36,7 @@ public class RenderHelper {
                 bufferSource,
                 BEAM_LOCATION,
                 partialTicks,
-                1.0f,
+                -1.0F,
                 partBeamFormer.getLevel().getGameTime(),
                 0,
                 partBeamFormer.getBeamLength() + 0.3F,
