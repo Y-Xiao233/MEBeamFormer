@@ -84,9 +84,6 @@ dependencies {
     implementation fg.deobf("curse.maven:applied-energistics-2-223794:6629570")
     implementation fg.deobf("curse.maven:guideme-1173950:6679102")
 
-    //for test
-    implementation fg.deobf("curse.maven:jade-324717:6271651")
-
 }
 
 tasks.named('processResources', ProcessResources).configure {
