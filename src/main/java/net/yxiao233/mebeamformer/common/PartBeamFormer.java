@@ -84,10 +84,10 @@ public class PartBeamFormer extends ModBasePart implements IGridTickable{
         if(hand == InteractionHand.MAIN_HAND && player.getMainHandItem().is(MeBeamFormer.WRENCH)){
             if(this.getLevel().isClientSide()){
                 if(hideBeam){
-                    player.sendSystemMessage(Component.translatable("message.mabeamformer.show"));
+                    player.sendSystemMessage(Component.translatable("message.mebeamformer.show"));
                     hideBeam = false;
                 }else {
-                    player.sendSystemMessage(Component.translatable("message.mabeamformer.hide"));
+                    player.sendSystemMessage(Component.translatable("message.mebeamformer.hide"));
                     hideBeam = true;
                 }
             }
@@ -104,6 +104,9 @@ public class PartBeamFormer extends ModBasePart implements IGridTickable{
     @OnlyIn(Dist.CLIENT)
     public void renderDynamic(float partialTicks, PoseStack poseStack, MultiBufferSource buffers, int combinedLightIn, int combinedOverlayIn) {
         super.renderDynamic(partialTicks, poseStack, buffers, combinedLightIn, combinedOverlayIn);
+        if(!shouldRenderBeam()){
+            return;
+        }
         BlockPos pos = this.getBlockEntity().getBlockPos();
         int x = pos.getX();
         int y = pos.getY();
