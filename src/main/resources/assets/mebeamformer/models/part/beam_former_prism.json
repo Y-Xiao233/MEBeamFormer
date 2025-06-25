@@ -2,7 +2,7 @@
   "ambientocclusion": false,
   "parent": "block/block",
   "textures": {
-    "glass": "nae2:part/beam_former_glass"
+    "glass": "mebeamformer:part/beam_former_glass"
   },
   "elements": [
     {

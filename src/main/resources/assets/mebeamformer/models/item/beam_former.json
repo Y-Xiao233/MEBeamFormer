@@ -2,12 +2,12 @@
   "credit": "Made with Blockbench",
   "parent": "block/block",
   "textures": {
-    "particle": "appliedenergistics2:blocks/wireless_access_point_inside",
-    "inside": "appliedenergistics2:blocks/wireless_access_point_inside",
-    "sides": "appliedenergistics2:parts/monitor_sides",
-    "sidesStatus": "appliedenergistics2:parts/monitor_sides_status",
-    "indicator": "appliedenergistics2:parts/monitor_sides_status_off",
-    "glass": "nae2:part/beam_former_glass"
+    "particle": "ae2:block/wireless_access_point_inside",
+    "inside": "ae2:block/wireless_access_point_inside",
+    "sides": "ae2:part/monitor_sides",
+    "sidesStatus": "ae2:part/monitor_sides_status",
+    "indicator": "ae2:part/monitor_sides_status_off",
+    "glass": "mebeamformer:part/beam_former_glass"
   },
   "elements": [
     {
