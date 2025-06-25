@@ -3,7 +3,7 @@
   "category": "misc",
   "key": {
     "a": {
-      "tag": "forge:ingots/gold"
+      "item": "ae2:quartz_vibrant_glass"
     },
     "b": {
       "item": "ae2:engineering_processor"
