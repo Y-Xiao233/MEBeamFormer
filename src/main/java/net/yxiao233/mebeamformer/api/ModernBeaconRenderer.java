@@ -12,12 +12,19 @@ import org.joml.Matrix3f;
 import org.joml.Matrix4f;
 
 public class ModernBeaconRenderer {
-    public static void renderBeaconBeam(PoseStack pPoseStack, MultiBufferSource pBufferSource, ResourceLocation pBeamLocation, float pPartialTick, float pTextureScale, long pGameTime, int pYOffset, float pHeight, float[] pColors, float pBeamRadius, float pGlowRadius) {
+    public static void renderBeaconBeam(PoseStack pPoseStack, MultiBufferSource pBufferSource, ResourceLocation pBeamLocation, float pPartialTick, float pTextureScale, long pGameTime, int pYOffset, float pHeight, float[] pColors, float pBeamRadius, float pGlowRadius, boolean isRotated, boolean isDynamics) {
         float $$11 = pYOffset + pHeight;
         pPoseStack.pushPose();
         pPoseStack.translate(0.5, 0.0, 0.5);
-        float $$12 = (float)Math.floorMod(pGameTime, 40) + pPartialTick;
+        float $$12 = 0;
         float $$13 = pHeight < 0 ? $$12 : -$$12;
+        if(isRotated){
+            $$12 = (float)Math.floorMod(pGameTime, 40) + pPartialTick;
+        }
+        if(isDynamics){
+            float $$20 = (float)Math.floorMod(pGameTime, 40) + pPartialTick;
+            $$13 = pHeight < 0 ? $$20 : -$$20;
+        }
         float $$14 = Mth.frac($$13 * 0.2F - (float)Mth.floor($$13 * 0.1F));
         float $$15 = pColors[0];
         float $$16 = pColors[1];

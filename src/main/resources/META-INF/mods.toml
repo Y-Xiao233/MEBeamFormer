@@ -9,6 +9,7 @@ license="${mod_license}"
    authors="${mod_authors}"
    description='''${mod_description}'''
 
+
 [[dependencies."${mod_id}"]]
    modId="forge"
    mandatory=true

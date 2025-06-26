@@ -3,10 +3,9 @@ package net.yxiao233.mebeamformer.api;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.blockentity.BeaconRenderer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.yxiao233.mebeamformer.common.PartBeamFormer;
+import net.yxiao233.mebeamformer.common.parts.PartBeamFormer;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.WeakHashMap;
@@ -42,7 +41,9 @@ public class RenderHelper {
                 partBeamFormer.getBeamLength() + 0.3F,
                 rgb,
                 0.2F,
-                0.025F
+                0.025F,
+                false,
+                true
         );
     }
 

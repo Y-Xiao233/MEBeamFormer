@@ -1,4 +1,4 @@
-package net.yxiao233.mebeamformer.common;
+package net.yxiao233.mebeamformer.common.parts;
 
 import appeng.api.networking.*;
 import appeng.api.networking.ticking.IGridTickable;
@@ -26,21 +26,24 @@ import net.minecraft.nbt.DoubleTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.world.ForgeChunkManager;
 import net.yxiao233.mebeamformer.MeBeamFormer;
 import net.yxiao233.mebeamformer.api.ModBasePart;
 import net.yxiao233.mebeamformer.api.RenderHelper;
+import net.yxiao233.mebeamformer.common.registry.ModTags;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.awt.*;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 
@@ -77,11 +80,12 @@ public class PartBeamFormer extends ModBasePart implements IGridTickable{
     public PartBeamFormer(IPartItem<?> is) {
         super(is);
         this.getMainNode().addService(IGridTickable.class, this);
+        this.getMainNode().setFlags(GridFlags.PREFERRED);
     }
 
     @Override
     public boolean onPartActivate(Player player, InteractionHand hand, Vec3 pos) {
-        if(hand == InteractionHand.MAIN_HAND && player.getMainHandItem().is(MeBeamFormer.WRENCH)){
+        if(hand == InteractionHand.MAIN_HAND && player.getMainHandItem().is(ModTags.Item.WRENCH)){
             if(this.getLevel().isClientSide()){
                 if(hideBeam){
                     player.sendSystemMessage(Component.translatable("message.mebeamformer.show"));
@@ -99,7 +103,6 @@ public class PartBeamFormer extends ModBasePart implements IGridTickable{
         return !this.hideBeam && this.beamLength != 0 && this.isActive() && this.isPowered();
     }
 
-
     @Override
     @OnlyIn(Dist.CLIENT)
     public void renderDynamic(float partialTicks, PoseStack poseStack, MultiBufferSource buffers, int combinedLightIn, int combinedOverlayIn) {
@@ -113,7 +116,6 @@ public class PartBeamFormer extends ModBasePart implements IGridTickable{
         int z = pos.getZ();
         RenderHelper.renderDynamic(poseStack,buffers,this, x, y, z, partialTicks);
     }
-
     @Override
     public boolean requireDynamicRender() {
         return true;
@@ -360,7 +362,6 @@ public class PartBeamFormer extends ModBasePart implements IGridTickable{
         this.beamLength = data.readInt();
         var wasPaired = this.paired;
         this.paired = data.readBoolean();
-        // Kick rendering.
         if (this.paired != wasPaired) {
             var pos = this.getBlockEntity().getBlockPos();
             var x = pos.getX();
