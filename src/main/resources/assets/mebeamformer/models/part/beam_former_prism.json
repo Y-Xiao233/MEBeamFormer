@@ -1,78 +1,24 @@
 {
-  "ambientocclusion": false,
-  "parent": "block/block",
-  "textures": {
-    "glass": "mebeamformer:part/beam_former_glass"
-  },
-  "elements": [
-    {
-      "name": "glass",
-      "from": [
-        7,
-        7,
-        -2
-      ],
-      "to": [
-        9,
-        9,
-        3
-      ],
-      "faces": {
-        "north": {
-          "uv": [
-            0,
-            0,
-            1,
-            1
-          ],
-          "texture": "#glass"
-        },
-        "east": {
-          "uv": [
-            0,
-            0,
-            1,
-            1
-          ],
-          "texture": "#glass"
-        },
-        "south": {
-          "uv": [
-            0,
-            0,
-            1,
-            1
-          ],
-          "texture": "#glass"
-        },
-        "west": {
-          "uv": [
-            0,
-            0,
-            1,
-            1
-          ],
-          "texture": "#glass"
-        },
-        "up": {
-          "uv": [
-            0,
-            0,
-            1,
-            1
-          ],
-          "texture": "#glass"
-        },
-        "down": {
-          "uv": [
-            0,
-            0,
-            1,
-            1
-          ],
-          "texture": "#glass"
-        }
-      }
-    }
-  ]
+	"credit": "Made with Blockbench",
+	"parent": "block/block",
+	"ambientocclusion": false,
+	"textures": {
+		"glass": "mebeamformer:part/beam_former_glass"
+	},
+	"elements": [
+		{
+			"name": "glass",
+			"from": [7, 7, -2],
+			"to": [9, 9, 0],
+			"rotation": {"angle": -45, "axis": "x", "origin": [8, 8, -1]},
+			"faces": {
+				"north": {"uv": [0, 0, 1, 1], "texture": "#glass"},
+				"east": {"uv": [0, 0, 1, 1], "texture": "#glass"},
+				"south": {"uv": [0, 0, 1, 1], "texture": "#glass"},
+				"west": {"uv": [0, 0, 1, 1], "texture": "#glass"},
+				"up": {"uv": [0, 0, 1, 1], "texture": "#glass"},
+				"down": {"uv": [0, 0, 1, 1], "texture": "#glass"}
+			}
+		}
+	]
 }

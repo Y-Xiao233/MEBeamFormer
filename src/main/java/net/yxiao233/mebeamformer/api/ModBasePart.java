@@ -3,6 +3,7 @@ package net.yxiao233.mebeamformer.api;
 import appeng.api.parts.IPartItem;
 import appeng.parts.AEBasePart;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.world.item.ItemStack;
 
 public abstract class ModBasePart extends AEBasePart {
@@ -15,7 +16,7 @@ public abstract class ModBasePart extends AEBasePart {
 
 
     @Override
-    public void writeToStream(FriendlyByteBuf data) {
+    public void writeToStream(RegistryFriendlyByteBuf data) {
         super.writeToStream(data);
 
         this.setClientFlags(0);
@@ -33,7 +34,7 @@ public abstract class ModBasePart extends AEBasePart {
     }
 
     @Override
-    public boolean readFromStream(FriendlyByteBuf data) {
+    public boolean readFromStream(RegistryFriendlyByteBuf data) {
         final var eh = super.readFromStream(data);
 
         final var old = this.getClientFlags();

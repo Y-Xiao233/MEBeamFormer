@@ -18,7 +18,7 @@
     "ccc"
   ],
   "result": {
-    "item": "mebeamformer:beam_former"
-  },
-  "show_notification": true
+    "id": "mebeamformer:beam_former",
+    "count": 1
+  }
 }

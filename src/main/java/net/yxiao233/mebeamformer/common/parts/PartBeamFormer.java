@@ -21,22 +21,22 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.DoubleTag;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.world.ForgeChunkManager;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.yxiao233.mebeamformer.MeBeamFormer;
 import net.yxiao233.mebeamformer.api.ModBasePart;
 import net.yxiao233.mebeamformer.api.RenderHelper;
@@ -84,7 +84,7 @@ public class PartBeamFormer extends ModBasePart implements IGridTickable{
     }
 
     @Override
-    public boolean onPartActivate(Player player, InteractionHand hand, Vec3 pos) {
+    public boolean onUseItemOn(ItemStack heldItem, Player player, InteractionHand hand, Vec3 pos) {
         if(hand == InteractionHand.MAIN_HAND && player.getMainHandItem().is(ModTags.Item.WRENCH)){
             if(this.getLevel().isClientSide()){
                 if(hideBeam){
@@ -94,9 +94,10 @@ public class PartBeamFormer extends ModBasePart implements IGridTickable{
                     player.sendSystemMessage(Component.translatable("message.mebeamformer.hide"));
                     hideBeam = true;
                 }
+                return true;
             }
         }
-        return super.onPartActivate(player, hand, pos);
+        return super.onUseItemOn(heldItem, player, hand, pos);
     }
 
     public boolean shouldRenderBeam() {
@@ -135,7 +136,7 @@ public class PartBeamFormer extends ModBasePart implements IGridTickable{
 
     @Override
     public TickingRequest getTickingRequest(IGridNode iGridNode) {
-        return new TickingRequest(2,20,false,true);
+        return new TickingRequest(2,20,false);
     }
 
     @Override
@@ -356,7 +357,7 @@ public class PartBeamFormer extends ModBasePart implements IGridTickable{
     }
 
     @Override
-    public boolean readFromStream(FriendlyByteBuf data){
+    public boolean readFromStream(RegistryFriendlyByteBuf data){
         var shouldRedraw = super.readFromStream(data);
 
         this.beamLength = data.readInt();
@@ -375,7 +376,7 @@ public class PartBeamFormer extends ModBasePart implements IGridTickable{
     }
 
     @Override
-    public void writeToStream(FriendlyByteBuf data){
+    public void writeToStream(RegistryFriendlyByteBuf data){
         super.writeToStream(data);
         data.writeInt(this.beamLength);
         data.writeBoolean(this.otherBeamFormer != null);
@@ -383,8 +384,8 @@ public class PartBeamFormer extends ModBasePart implements IGridTickable{
     }
 
     @Override
-    public void writeToNBT(CompoundTag data) {
-        super.writeToNBT(data);
+    public void writeToNBT(CompoundTag data, HolderLookup.Provider registries) {
+        super.writeToNBT(data,registries);
 
         var part = data.getCompound("part");
         if (this.beamLength > 0) part.putInt("beamLength", this.beamLength);
@@ -392,8 +393,8 @@ public class PartBeamFormer extends ModBasePart implements IGridTickable{
     }
 
     @Override
-    public void readFromNBT(CompoundTag data) {
-        super.readFromNBT(data);
+    public void readFromNBT(CompoundTag data, HolderLookup.Provider registries) {
+        super.readFromNBT(data,registries);
 
         var part = data.getCompound("part");
 
